@@ -46,7 +46,7 @@ var datatable = $('#dc-table-graph');
 d3.dsv(';')("data/3W_Data.csv", function(csv_data) {
 	
 	//Extract header titles of each column. In total there will be 11 columns for these type of dashboards:
-	//ID, Organisation, Sector, Subsector, Service provided, Province_CODE, Municipality_CODE, Barangay, Status, Beneficiaries, Beneficiary type.
+	//ID, Implementing Partner, Lead Office, Type of Project, Project Title, Province_CODE, Municipality_CODE, Barangay, Status, Beneficiaries, Beneficiary type.
 	
 	var csv_headers = d3.keys(csv_data[0]);
 	
@@ -54,16 +54,16 @@ d3.dsv(';')("data/3W_Data.csv", function(csv_data) {
 	
 	//The dimension function is applied to the re-named column headers. Their titles are as in the html table:
 	xf.id = xf.dimension(function(d) {return d[csv_headers[0]]; }); //ID
-    xf.organisation = xf.dimension(function(d) { return d[csv_headers[1]]; }); //Organisation
-	xf.sector = xf.dimension(function(d) { return d[csv_headers[2]]; });
-    xf.service = xf.dimension(function(d) { return d[csv_headers[4]]; }); //Service provided
+    xf.organisation = xf.dimension(function(d) { return d[csv_headers[1]]; }); //Implementing Partner
+	xf.sector = xf.dimension(function(d) { return d[csv_headers[2]]; }); //Type of Project
+    xf.service = xf.dimension(function(d) { return d[csv_headers[4]]; }); //Project Title
     xf.pcode = xf.dimension(function(d) { return d[csv_headers[5]]; }); //Province_CODE
     xf.mcode = xf.dimension(function(d) { return d[csv_headers[6]]; }); //Municipality_CODE
 			 
-    var sector = xf.sector.group();
-    var service = xf.service.group().reduceSum(function(d) {return d[csv_headers[9]];}); //Service
+    var sector = xf.sector.group(); //Type of Project
+    var service = xf.service.group().reduceSum(function(d) {return d[csv_headers[9]];}); //Project Title
     var pcode = xf.pcode.group();
-    var organisation = xf.organisation.group();
+    var organisation = xf.organisation.group(); //Implementing Partner
     var mcode = xf.mcode.group();
     var all = xf.groupAll();
 	
@@ -140,23 +140,23 @@ d3.dsv(';')("data/3W_Data.csv", function(csv_data) {
 		columnDefs: [
 			{
 				targets: 0,
-				data: function (d) { return d[csv_headers[1]]; }, //Organisation
+				data: function (d) { return d[csv_headers[1]]; }, //Implementing Partner
 				defaultContent: ''
 			},
 			{
 				targets: 1,
-				data: function (d) { return d[csv_headers[2]]; }, //Sector
+				data: function (d) { return d[csv_headers[2]]; }, //Type of Project
 				defaultContent: ''
 			},
 			{
 				targets: 2,
-				data: function (d) { return d[csv_headers[3]]; }, //Subsector
+				data: function (d) { return d[csv_headers[3]]; }, //Lead Office
 				defaultContent: ''
 			},
 			{
 				width: '100%',
 				targets: 3,
-				data: function (d) { return d[csv_headers[4]];}, //Service provided
+				data: function (d) { return d[csv_headers[4]];}, //Project Title
 				defaultContent: ''
 				
 			},
