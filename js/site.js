@@ -46,7 +46,7 @@ var datatable = $('#dc-table-graph');
 d3.dsv(';')("data/3W_Data.csv", function(csv_data) {
 	
 	//Extract header titles of each column. In total there will be 11 columns for these type of dashboards:
-	//ID, Implementing Partner, Lead Office, Type of Project, Project Title, Province_CODE, Municipality_CODE, Barangay, Status, Beneficiaries, Beneficiary type.
+	//ID, Implementing Partner, Type of Project, Lead Office, Project Title, Province_CODE, Municipality_CODE, Barangay, Status, Beneficiaries, Beneficiary type.
 	
 	var csv_headers = d3.keys(csv_data[0]);
 	
