@@ -37,7 +37,7 @@ var map_chart = dc.geoChoroplethChart("#map");
 var map2_chart = dc.geoChoroplethChart("#map2");
 var sector_chart = dc.rowChart("#sectors");
 var service_chart = dc.rowChart("#services");
-var organisation_chart = dc.rowChart("#organisations");
+var status_chart = dc.rowChart("#status");
 var datatable = $('#dc-table-graph');
 
 //---------------------------------------------------------------------------
@@ -63,7 +63,7 @@ d3.dsv(';')("data/3W_Data.csv", function(csv_data) {
     var sector = xf.sector.group(); //Type of Project
     var service = xf.service.group().reduceSum(function(d) {return d[csv_headers[9]];}); //Project Title
     var pcode = xf.pcode.group();
-    var organisation = xf.organisation.group(); //Implementing Partner
+    var status = xf.status.group(); //Status
     var mcode = xf.mcode.group();
     var all = xf.groupAll();
 	
@@ -98,9 +98,9 @@ d3.dsv(';')("data/3W_Data.csv", function(csv_data) {
 				.xAxis().ticks(5)
 				;
 			
-	organisation_chart.width(320).height(300)
-                .dimension(xf.organisation)
-                .group(organisation)
+	status_chart.width(320).height(300)
+                .dimension(xf.status)
+                .group(status)
                 .elasticX(true)
                 .data(function(group) {
                     return group.top(10).filter( function (d) { return d.value !== 0; } );
