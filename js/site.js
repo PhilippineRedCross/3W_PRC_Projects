@@ -36,7 +36,7 @@ $('#map').hide();
 var map_chart = dc.geoChoroplethChart("#map");
 var map2_chart = dc.geoChoroplethChart("#map2");
 var sector_chart = dc.rowChart("#sectors");
-var service_chart = dc.rowChart("#services");
+var organisation_chart = dc.rowChart("#organisations");
 var status_chart = dc.rowChart("#status");
 var datatable = $('#dc-table-graph');
 
@@ -54,7 +54,7 @@ d3.dsv(';')("data/3W_Data.csv", function(csv_data) {
 	
 	//The dimension function is applied to the re-named column headers. Their titles are as in the html table:
 	xf.id = xf.dimension(function(d) {return d[csv_headers[0]]; }); //ID
-    xf.organisation = xf.dimension(function(d) { return d[csv_headers[1]]; }); //Implementing Partner
+    xf.status = xf.dimension(function(d) { return d[csv_headers[1]]; }); //Status
 	xf.sector = xf.dimension(function(d) { return d[csv_headers[2]]; }); //Type of Project
     xf.service = xf.dimension(function(d) { return d[csv_headers[4]]; }); //Project Title
     xf.pcode = xf.dimension(function(d) { return d[csv_headers[5]]; }); //Province_CODE
