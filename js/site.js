@@ -37,7 +37,7 @@ var map_chart = dc.geoChoroplethChart("#map");
 var map2_chart = dc.geoChoroplethChart("#map2");
 var sector_chart = dc.rowChart("#sectors");
 var service_chart = dc.rowChart("#services");
-var status_chart = dc.rowChart("#status");
+var organisation_chart = dc.rowChart("#organisations");
 var datatable = $('#dc-table-graph');
 
 //---------------------------------------------------------------------------
@@ -54,14 +54,14 @@ d3.dsv(';')("data/3W_Data.csv", function(csv_data) {
 	
 	//The dimension function is applied to the re-named column headers. Their titles are as in the html table:
 	xf.id = xf.dimension(function(d) {return d[csv_headers[0]]; }); //ID
-    xf.status = xf.dimension(function(d) { return d[csv_headers[1]]; }); //Status
+    xf.status = xf.dimension(function(d) { return d[csv_headers[8]]; }); //Status
 	xf.sector = xf.dimension(function(d) { return d[csv_headers[2]]; }); //Type of Project
     xf.service = xf.dimension(function(d) { return d[csv_headers[4]]; }); //Project Title
     xf.pcode = xf.dimension(function(d) { return d[csv_headers[5]]; }); //Province_CODE
     xf.mcode = xf.dimension(function(d) { return d[csv_headers[6]]; }); //Municipality_CODE
 			 
     var sector = xf.sector.group(); //Type of Project
-    var service = xf.service.group().reduceSum(function(d) {return d[csv_headers[9]];}); //Project Title
+    var service = xf.service.group().reduceSum(function(d) {return d[csv_headers[4]];}); //Project Title
     var pcode = xf.pcode.group();
     var status = xf.status.group(); //Status
     var mcode = xf.mcode.group();
