@@ -36,7 +36,7 @@ $('#map').hide();
 var map_chart = dc.geoChoroplethChart("#map");
 var map2_chart = dc.geoChoroplethChart("#map2");
 var sector_chart = dc.rowChart("#sectors");
-var organisation_chart = dc.rowChart("#organisations");
+var service_chart = dc.rowChart("#services");
 var status_chart = dc.rowChart("#status");
 var datatable = $('#dc-table-graph');
 
