@@ -54,16 +54,16 @@ d3.dsv(';')("data/3W_Data.csv", function(csv_data) {
 	
 	//The dimension function is applied to the re-named column headers. Their titles are as in the html table:
 	xf.id = xf.dimension(function(d) {return d[csv_headers[0]]; }); //ID
-    xf.status = xf.dimension(function(d) { return d[csv_headers[8]]; }); //Status
+    xf.organisation = xf.dimension(function(d) { return d[csv_headers[1]]; }); //Implementing Partner
 	xf.sector = xf.dimension(function(d) { return d[csv_headers[2]]; }); //Type of Project
     xf.service = xf.dimension(function(d) { return d[csv_headers[4]]; }); //Project Title
     xf.pcode = xf.dimension(function(d) { return d[csv_headers[5]]; }); //Province_CODE
     xf.mcode = xf.dimension(function(d) { return d[csv_headers[6]]; }); //Municipality_CODE
 			 
     var sector = xf.sector.group(); //Type of Project
-    var service = xf.service.group().reduceSum(function(d) {return d[csv_headers[4]];}); //Project Title
+    var service = xf.service.group().reduceSum(function(d) {return d[csv_headers[9]];}); //Project Title
     var pcode = xf.pcode.group();
-    var status = xf.status.group(); //Status
+    var organisation = xf.organisation.group(); //Implementing Partner
     var mcode = xf.mcode.group();
     var all = xf.groupAll();
 	
@@ -98,9 +98,9 @@ d3.dsv(';')("data/3W_Data.csv", function(csv_data) {
 				.xAxis().ticks(5)
 				;
 			
-	status_chart.width(320).height(300)
-                .dimension(xf.status)
-                .group(status)
+	organisation_chart.width(320).height(300)
+                .dimension(xf.organisation)
+                .group(organisation)
                 .elasticX(true)
                 .data(function(group) {
                     return group.top(10).filter( function (d) { return d.value !== 0; } );
